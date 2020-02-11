@@ -95,15 +95,16 @@ print("\(cleanAgents.count) clean agents out of \(theList.count) total agents.")
 //: - Example: `Jon Voight, level: 9 **WARNING** **COMPROMISED**`
 func findHighRisk(agentsTuple: [Agent]) {
     var warningText = ""
-    for agent in agentsTuple {
+    
+    let highLevelAgents = agentsTuple.filter{ $0.accessLevel >= 8 }
+
+    for agent in highLevelAgents {
         if agent.compromised {
-            if agent.accessLevel >= 8 {
-                warningText = "**WARNING** **COMPROMISED**"
-            } else {
-                warningText = ""
-            }
-            print("\(agent.realName), level: \(agent.accessLevel) \(warningText)")
+            warningText = "**WARNING** **COMPROMISED**"
+        } else {
+            warningText = ""
         }
+        print("*\(agent.realName), level: \(agent.accessLevel) \(warningText)")
     }
 }
 //: ## Step 8
